@@ -1,0 +1,27 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  test:
+    dir: ticker_etl
+    cmds:
+      - uv run pytest
+
+  example:
+    dir: ticker_etl
+    cmds:
+      - uv run python src/ticker_etl/main.py --ticker AAPL --trade-date-from 2025-01-01 --trade-date-to 2025-01-01
+
+  part_1:
+    vars: 
+      TRADE_DATE_FROM: '{{.TRADE_DATE_FROM| default "2025-01-01"}}'
+      TRADE_DATE_TO: '{{.TRADE_DATE_TO| default "2025-01-01"}}'
+    dir: ticker_etl
+    cmds:
+      - uv run python src/ticker_etl/main.py --ticker AAPL --trade-date-from {{.TRADE_DATE_FROM}} --trade-date-to {{.TRADE_DATE_TO}}
+      - uv run python src/ticker_etl/main.py --ticker MSFT --trade-date-from {{.TRADE_DATE_FROM}} --trade-date-to {{.TRADE_DATE_TO}}
+      - uv run python src/ticker_etl/main.py --ticker GOOGL --trade-date-from {{.TRADE_DATE_FROM}} --trade-date-to {{.TRADE_DATE_TO}}
