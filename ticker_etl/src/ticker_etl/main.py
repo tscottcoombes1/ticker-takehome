@@ -41,7 +41,9 @@ def main(ticker: str, trade_date_from: datetime.date, trade_date_to: datetime.da
 
         for i, agg in enumerate(response):
             if i != 0:
-                td = TickerDate(agg, ticker=ticker, prior_volume=prior_volume, run_id=run.run_id)
+                td = TickerDate(
+                    agg, ticker=ticker, prior_volume=prior_volume, run_id=run.run_id
+                )
                 td.persist()
 
             prior_volume = agg.volume

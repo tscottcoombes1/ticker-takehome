@@ -1,9 +1,6 @@
 from pathlib import Path
 import json
-from polygon import RESTClient
 from polygon.rest.models import Agg
-from dotenv import load_dotenv
-import os
 import datetime
 import pytz
 
@@ -14,10 +11,12 @@ class TickerDate:
         self.ticker = ticker
         self.prior_volume = prior_volume
         self.run_id = run_id
-    
+
     @property
     def agg_at_et(self):
-        return datetime.datetime.fromtimestamp(self.agg.timestamp/1000, tz=pytz.timezone("US/Eastern"))
+        return datetime.datetime.fromtimestamp(
+            self.agg.timestamp / 1000, tz=pytz.timezone("US/Eastern")
+        )
 
     @property
     def agg_at_utc(self):
@@ -51,7 +50,6 @@ class TickerDate:
             return "Bear"
 
         return "Neutral"
-        
 
     def to_json(self):
         return {
@@ -59,7 +57,7 @@ class TickerDate:
             "agg_at_et": self.agg_at_et.isoformat(),
             "agg_at_utc": self.agg_at_utc.isoformat(),
             "status": self.status,
-            "run_id": self.run_id
+            "run_id": self.run_id,
         }
 
     def persist(self):

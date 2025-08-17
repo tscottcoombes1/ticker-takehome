@@ -37,6 +37,8 @@ Prereqs:
 brew bundle
 ```
 
+Add an `.env`, look at the `.example.env`.
+
 I have set up a handy Taskfile. Run:
 ```
 task test
@@ -194,4 +196,22 @@ Data quality issues are interesting. It probably depends on the tooling downstre
   * This can be something automated, like data quality warnings in tableau set by a governance tool like atlan
   * or a message in slack to the #data-stewards 
 
+# Final checklist
+
+Deliverables
+1. Source Code:
+* Complete, runnable Python pipeline ✅
+* README with setup and execution instructions ✅
+* Requirements file ✅
+  * also in this README
+2. Documentation:
+* Architecture design document (1 page max) ✅
+  * also in this README
+* Observability plan (1 page max) ✅
+* Link to a GitHub repository with your solution ✅
+3. Sample Output:
+* Sample of processed data ✅
+  * see ticker_etl/storage/tickers
+* Sample logs showing pipeline execution
+  * ticker_etl/storage/tickers
 
